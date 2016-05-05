@@ -9,15 +9,19 @@ import java.util.*;
  * Created by user on 05/05/16.
  */
 public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
+
     private Map<String, Object> table;
+    private  Map<String, Integer> popularKey;
 
     public URegistryImpl() throws RemoteException {
-        table= new HashMap<>();
+        table= new LinkedHashMap<>();
+        popularKey= new LinkedHashMap<>();
     }
 
     public URegistryImpl(int portNb) throws RemoteException {
         super(portNb);
-        table= new HashMap<>();
+        table= new LinkedHashMap<>();
+        popularKey= new LinkedHashMap<>();
     }
 
     /**
@@ -50,7 +54,13 @@ public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
      */
     @Override
     public Object get(String key) {
-        return  table.get(key);
+        if (popularKey.containsKey(key)) {
+            int coeff = popularKey.get(key);
+            popularKey.replace(key, coeff, ++coeff);
+            System.out.println("Modif"+coeff);
+        }
+        else popularKey.put(key, 0);
+        return table.get(key);
     }
 
     /**
@@ -59,5 +69,39 @@ public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
     @Override
     public List<String> list() {
         return new ArrayList<>(table.keySet());
+    }
+
+    public List<Object> getLastObjects(int until){
+        List<Object> res= new ArrayList<>();
+        int i=0;
+        for (String s: table.keySet()) {
+            if (i++<until)
+                res.add(table.get(s));
+        }
+        return res;
+    }
+
+    public List<String> getLastKeys(int until){
+        List<String> res= new ArrayList<>();
+        int i=0;
+        for (String s: table.keySet()) {
+            if (i++<until)
+                res.add(s);
+        }
+        return res;
+    }
+
+    //TODO A revoir (ne cherche pas dans les N derniers)
+    public List<String> getPopularKey(int until){
+        if (popularKey.isEmpty()) return null;
+        List<String> res= new ArrayList<>();
+        int i=0;
+        for (String key: table.keySet()) {
+            System.out.println("-->"+key+ popularKey.get(key));
+            if (i++<until && popularKey.get(key)!=null && popularKey.get(key)>1)
+                res.add(key);
+            System.out.println("taille"+ res.size());
+        }
+        return res;
     }
 }

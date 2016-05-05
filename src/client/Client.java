@@ -14,13 +14,27 @@ public class Client {
     public static void main(String[] args) {
         try {
             URegistry reg= (URegistry) Naming.lookup("rmi://localhost/registry");
-            reg.bind("Entier", new Integer(3));
-            List<String> s= reg.list();
-            System.out.println(s.contains("Entier"));
+            reg.rebind("Vieux", new Integer(100));
+            reg.rebind("Entier1", new Integer(1));
+            reg.rebind("Entier2", new Integer(2));
+            reg.rebind("Entier3", new Integer(3));
+            reg.rebind("Entier4", new Integer(4));
+            reg.rebind("Entier5", new Integer(5));
+            reg.get("Vieux");
+            reg.get("Vieux");
+            reg.get("Vieux");
+            reg.get("Vieux");
+            reg.get("Entier1");
+            reg.get("Entier3");
+            reg.get("Entier1");
+            reg.get("Entier3");
+            reg.get("Entier1");
+            reg.get("Entier1");
+            List<String> res= reg.getPopularKey(2);
+            for (String s: res)
+                System.out.println(s);
         } catch (MalformedURLException | RemoteException | NotBoundException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
     }

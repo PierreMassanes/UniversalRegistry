@@ -20,7 +20,7 @@ public class Server {
             URegistryImpl reg = new URegistryImpl();
 
             Naming.rebind("registry", reg);
-            System.out.println("Youpi!");
+            System.out.println("Server launched...");
 
         } catch (RemoteException e) {
             e.printStackTrace();

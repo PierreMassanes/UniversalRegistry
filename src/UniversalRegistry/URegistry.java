@@ -3,6 +3,7 @@ package UniversalRegistry;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,4 +13,7 @@ public interface URegistry extends Remote {
     void rebind(String key, Object object) throws RemoteException;
     Object get(String key) throws RemoteException;
     List<String> list() throws RemoteException;
+    List<Object> getLastObjects(int until) throws RemoteException;
+    List<String> getLastKeys(int until) throws RemoteException;
+    List<String> getPopularKey(int until) throws RemoteException;
 }
