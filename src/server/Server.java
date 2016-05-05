@@ -1,6 +1,9 @@
 package server;
 
+import UniversalRegistry.URegistryImpl;
+
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -22,6 +25,8 @@ public class Server {
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }

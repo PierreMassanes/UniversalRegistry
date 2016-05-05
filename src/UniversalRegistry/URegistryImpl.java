@@ -14,11 +14,11 @@ import java.util.Set;
 public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
     private Map<String, Object> table;
 
-    protected URegistryImpl() throws RemoteException {
+    public URegistryImpl() throws RemoteException {
         table= new HashMap<>();
     }
 
-    protected URegistryImpl(int portNb) throws RemoteException {
+    public URegistryImpl(int portNb) throws RemoteException {
         super(portNb);
         table= new HashMap<>();
     }
