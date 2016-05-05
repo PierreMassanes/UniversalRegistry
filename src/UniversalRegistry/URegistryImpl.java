@@ -3,10 +3,7 @@ package UniversalRegistry;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by user on 05/05/16.
@@ -60,7 +57,7 @@ public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
      * @return the list of keys in the table
      */
     @Override
-    public Set<String> list() {
-        return table.keySet();
+    public List<String> list() {
+        return new ArrayList<>(table.keySet());
     }
 }
