@@ -21,6 +21,7 @@ public class Server {
             URegistryImpl reg = new URegistryImpl();
 
             Naming.rebind("registry", reg);
+            System.out.println("Youpi!");
 
         } catch (RemoteException e) {
             e.printStackTrace();

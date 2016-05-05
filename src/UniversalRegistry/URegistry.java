@@ -2,12 +2,13 @@ package UniversalRegistry;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.Set;
 
 public interface URegistry extends Remote {
 
-    void bind(String key, Object object) throws AlreadyBoundException;
-    void rebind(String key, Object object);
-    Object get(String key);
-    Set<String> list();
+    void bind(String key, Object object) throws AlreadyBoundException, RemoteException;
+    void rebind(String key, Object object) throws RemoteException;
+    Object get(String key) throws RemoteException;
+    Set<String> list() throws RemoteException;
 }
