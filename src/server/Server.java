@@ -16,7 +16,6 @@ public class Server {
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(1099);
-            String url = "rmi://"+ InetAddress.getLocalHost().getHostAddress();
 
             URegistryImpl reg = new URegistryImpl();
 
@@ -24,8 +23,6 @@ public class Server {
             System.out.println("Youpi!");
 
         } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
