@@ -17,8 +17,4 @@ public interface URegistry extends Remote {
     List<Object> getLastObjects(int until) throws RemoteException;
     List<String> getLastKeys(int until) throws RemoteException;
     List<String> getPopularKey(int until) throws RemoteException;
-    void iniConnection() throws RemoteException;
-    void suscribe(String clientName) throws RemoteException;
-    void closeConnection() throws RemoteException;
-    void publish(String content) throws RemoteException;
 }
