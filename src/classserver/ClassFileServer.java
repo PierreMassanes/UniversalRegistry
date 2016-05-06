@@ -9,6 +9,7 @@ package classserver;
 public class ClassFileServer extends ClassServer {
 
   private java.io.File[] codebases;
+    private String classpath;
 
 
   //
@@ -44,9 +45,10 @@ public class ClassFileServer extends ClassServer {
    * @param port the port to bound the server to
    */
   public ClassFileServer(int port, String paths) throws java.io.IOException {
-    super(port);
-    if (paths != null) codebases = findClasspathRoots(paths);
-    printMessage();
+      super(port);
+      this.classpath = paths;
+      if (paths != null) codebases = findClasspathRoots(paths);
+      printMessage();
   }
 
 
@@ -70,6 +72,13 @@ public class ClassFileServer extends ClassServer {
     }
   }
 
+  public void addClasspath(String path){
+      if(!this.classpath.contains(path)){
+          path = ":"+path;
+          this.classpath += path;
+          codebases = findClasspathRoots(this.classpath);
+      }
+  }
 
   /**
    * Main method to create the class server that reads
@@ -257,9 +266,9 @@ public class ClassFileServer extends ClassServer {
   }
 
 
-  private java.io.File[] findClasspathRoots(String classpath) {
+  private java.io.File[] findClasspathRoots(String path) {
     String pathSeparator = System.getProperty("path.separator");
-    java.util.StringTokenizer st = new java.util.StringTokenizer(classpath, pathSeparator);
+    java.util.StringTokenizer st = new java.util.StringTokenizer(path, pathSeparator);
     int n = st.countTokens();
     java.io.File[] roots = new java.io.File[n];
     for (int i = 0; i < n; i++) {

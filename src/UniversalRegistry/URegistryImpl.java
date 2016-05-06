@@ -1,6 +1,9 @@
 package UniversalRegistry;
 
+import classserver.ClassFileServer;
+
 import javax.jms.*;
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -13,10 +16,16 @@ public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
 
     private Map<String, Object> table;
     private  Map<String, Integer> popularKey;
+    ClassFileServer classFileServer;
 
     public URegistryImpl() throws RemoteException {
         table= new LinkedHashMap<>();
         popularKey= new LinkedHashMap<>();
+        try {
+            classFileServer = new ClassFileServer(1098, "");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public URegistryImpl(int portNb) throws RemoteException {
@@ -105,5 +114,10 @@ public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
             System.out.println("taille"+ res.size());
         }
         return res;
+    }
+
+    @Override
+    public void addCodebase(String classpath) throws RemoteException {
+        this.classFileServer.addClasspath(classpath);
     }
 }
