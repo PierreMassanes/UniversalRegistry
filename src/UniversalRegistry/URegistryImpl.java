@@ -56,7 +56,8 @@ public class URegistryImpl extends UnicastRemoteObject implements URegistry  {
     public Object get(String key) {
         if (popularKey.containsKey(key)) {
             int coeff = popularKey.get(key);
-            popularKey.replace(key, coeff, ++coeff);
+            popularKey.put(key,++coeff);
+           // popularKey.replace(key, coeff, ++coeff);
             System.out.println("Modif"+coeff);
         }
         else popularKey.put(key, 0);
