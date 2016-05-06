@@ -2,6 +2,7 @@ package client;
 
 import UniversalRegistry.URegistry;
 
+import javax.jms.*;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
@@ -33,6 +34,16 @@ public class Client {
             List<String> res= reg.getPopularKey(2);
             for (String s: res)
                 System.out.println(s);
+            reg.iniConnection();
+            reg.suscribe("Bob");
+            reg.publish("Coucou!!");
+            reg.suscribe("Marie");
+            reg.publish("Hello!!");
+            reg.closeConnection();
+            /*TopicConnection connection= reg.suscribe();
+            TopicSession topicSession = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
+            TopicSubscriber topicSubscriber = topicSession.createSubscriber(connection);
+            topicConn.start();*/
         } catch (MalformedURLException | RemoteException | NotBoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
