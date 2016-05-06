@@ -15,6 +15,9 @@ import java.rmi.registry.LocateRegistry;
 public class Server {
     public static void main(String[] args) {
         try {
+            if(System.getSecurityManager() == null){
+                System.setSecurityManager(new java.rmi.RMISecurityManager());
+            }
             LocateRegistry.getRegistry(1099);
 
             URegistryImpl reg = new URegistryImpl();

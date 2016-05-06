@@ -1,6 +1,5 @@
 package UniversalRegistry;
 
-import client.ConsumerMessageListener;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
