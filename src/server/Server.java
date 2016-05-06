@@ -34,8 +34,6 @@ public class Server {
             e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
