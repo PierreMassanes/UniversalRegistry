@@ -12,5 +12,5 @@ Pour lancer le registre universel, il suffit d'exécuter le main de la classe Se
 et mettre les arguments suivants dans la JVM :
 
     -Djava.rmi.server.useCodebaseOnly=false -Djava.rmi.server.codebase="http://Axxx:1098/" 
-    -Djava.security.policy=/home/user/IdeaProjects/UniversalRegistry/src/server/policy_server
+    -Djava.security.policy=[Chemin vers policy_server]
 

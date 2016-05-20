@@ -13,7 +13,7 @@ import java.rmi.registry.LocateRegistry;
 public class Server {
     public static void main(String[] args) {
         try {
-            System.out.println("Lauching the server...");
+            System.out.println("Launching the server...");
             if(System.getSecurityManager() == null){
                 System.setSecurityManager(new java.rmi.RMISecurityManager());
             }
@@ -25,7 +25,6 @@ public class Server {
             System.out.println(" > UniversalRegistry registered on the RMIRegistry");
 
             System.out.println("Server launched !");
-
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -33,3 +32,5 @@ public class Server {
         }
     }
 }
+
+//-Djava.rmi.server.useCodebaseOnly=false -Djava.rmi.server.codebase="http://b036:1098/
